@@ -16,6 +16,7 @@ import HomeScreen from './modules/home/screen/HomeScreen';
 import SettingsScreen from './modules/settings/screens/SettingsScreen';
 import {NativeBaseProvider} from 'native-base';
 import CourseScreen from './modules/course/CourseScreen';
+import PictureTestScreen from './modules/test/screen/PictureTestScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,10 +24,14 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Course">
+        <Stack.Navigator initialRouteName="PictureTestScreen">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="Course" component={CourseScreen} />
+          <Stack.Screen
+            name="PictureTestScreen"
+            component={PictureTestScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
