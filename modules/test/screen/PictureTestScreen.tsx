@@ -9,14 +9,14 @@ import {View} from 'native-base';
 const PictureTestScreen = () => {
   return (
     <SafeAreaView style={Styles.container}>
-      <Text>png</Text>
+      <Text style={{fontFamily: 'Poppins-Medium', fontSize: 30}}>png</Text>
       <Image
         style={Styles.dummyPng}
         source={require('../../../assets/png/picture-demo.png')}
       />
-      <Text>svg</Text>
+      <Text style={{fontFamily: 'Poppins-SemiBold', fontSize: 30}}>svg</Text>
       <DemoSvg height="20%" width="100%" />
-      <Text>lottie</Text>
+      <Text style={{fontFamily: 'Poppins-Bold', fontSize: 30}}>lottie</Text>
       <View style={Styles.dummyPng}>
         <Lottie
           source={require('../../../assets/lottie/spiner-demo.json')}

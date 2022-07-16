@@ -14,6 +14,9 @@
 		6172F2D35A4C3AA820D92908 /* libPods-vroomMmobileAppDriver.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-vroomMmobileAppDriver.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-vroomMmobileAppDriver-vroomMmobileAppDriverTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-vroomMmobileAppDriver-vroomMmobileAppDriverTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D8B4ED07288367AF005AF45C /* poppinssemibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8B4ED04288367AF005AF45C /* poppinssemibold.ttf */; };
+		D8B4ED08288367AF005AF45C /* poppinsbold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8B4ED05288367AF005AF45C /* poppinsbold.ttf */; };
+		D8B4ED09288367AF005AF45C /* poppinsmedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8B4ED06288367AF005AF45C /* poppinsmedium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,9 @@
 		ABFE59519B596E51CEFDCCC0 /* libPods-vroomMmobileAppDriver-vroomMmobileAppDriverTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vroomMmobileAppDriver-vroomMmobileAppDriverTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-vroomMmobileAppDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vroomMmobileAppDriver.debug.xcconfig"; path = "Target Support Files/Pods-vroomMmobileAppDriver/Pods-vroomMmobileAppDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-vroomMmobileAppDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vroomMmobileAppDriver.release.xcconfig"; path = "Target Support Files/Pods-vroomMmobileAppDriver/Pods-vroomMmobileAppDriver.release.xcconfig"; sourceTree = "<group>"; };
+		D8B4ED04288367AF005AF45C /* poppinssemibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = poppinssemibold.ttf; path = ../assets/fonts/poppinssemibold.ttf; sourceTree = "<group>"; };
+		D8B4ED05288367AF005AF45C /* poppinsbold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = poppinsbold.ttf; path = ../assets/fonts/poppinsbold.ttf; sourceTree = "<group>"; };
+		D8B4ED06288367AF005AF45C /* poppinsmedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = poppinsmedium.ttf; path = ../assets/fonts/poppinsmedium.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -116,6 +122,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D8B4ED05288367AF005AF45C /* poppinsbold.ttf */,
+				D8B4ED06288367AF005AF45C /* poppinsmedium.ttf */,
+				D8B4ED04288367AF005AF45C /* poppinssemibold.ttf */,
 				13B07FAE1A68108700A75B9A /* vroomMmobileAppDriver */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* vroomMmobileAppDriverTests */,
@@ -145,7 +154,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-vroomMmobileAppDriver-vroomMmobileAppDriverTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-vroomMmobileAppDriver-vroomMmobileAppDriverTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,6 +251,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8B4ED07288367AF005AF45C /* poppinssemibold.ttf in Resources */,
+				D8B4ED08288367AF005AF45C /* poppinsbold.ttf in Resources */,
+				D8B4ED09288367AF005AF45C /* poppinsmedium.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
