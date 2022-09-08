@@ -1,3 +1,5 @@
+import {LatLng, Region} from 'react-native-maps';
+
 export type AddressInfoType = {
   id: number;
   value: string;
@@ -11,8 +13,13 @@ export type AddressInfoType = {
 };
 
 export type AddressDistanceInfoType = {
-  distanceInKmStr: string;
-  durationStr: string;
-  distanceInKm: number;
-  durationInSeconds: number;
+  distanceInKmStr?: string;
+  durationStr?: string;
+  distanceInKm?: number;
+  durationInSeconds?: number;
 };
+
+export type AddressType = AddressInfoType &
+  AddressDistanceInfoType & {
+    latLng?: LatLng;
+  };

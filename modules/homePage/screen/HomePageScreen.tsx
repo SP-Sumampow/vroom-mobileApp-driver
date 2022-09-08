@@ -1,8 +1,7 @@
 import {Linking, SafeAreaView, StyleSheet} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback} from 'react';
 import Menu from '../components/Menu/Menu';
-import MapView, {Marker, Polyline, Region} from 'react-native-maps';
-import {PointType} from '../../../Model/Point/Point.types';
+import MapView, {Marker, Polyline} from 'react-native-maps';
 import Style from './HomePageScreen.styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AddressDestinationForm from '../components/AddressDestinationForm/AddressDestinationForm';
@@ -10,41 +9,25 @@ import {
   calculateKmAndTime,
   searchAddress,
 } from '../../../services/ride/rideService';
+import useRideStore from '../../../stores/Ride/RideStore';
 // @ts-ignore
-
-//{navigation}: {navigation: any}
 export default function HomePageScreen({navigation}: {navigation: any}) {
   // Contants
   const {top: topSafeArea} = useSafeAreaInsets();
-  // States
-  const [centerRegion, setCenterRegion] = useState<Region | undefined>();
-  const [startPoint, setStartPoint] = useState<PointType>({
-    id: '0',
-    title: 'Start point',
-    description: 'blabla',
-    region: {
-      latitude: 48.8519287,
-      longitude: 2.4235699,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    },
-  });
 
-  const [endPoint, setEndPoint] = useState<PointType>({
-    id: '1',
-    title: 'End point',
-    description: 'blabla',
-    region: {
-      latitude: 48.8584708,
-      longitude: 2.4338033,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    },
-  });
+  const setRide = useRideStore(state => state.setRide);
+  const resetStore = useRideStore(state => state.resetStore);
+
+  const centerMapRegion = useRideStore(state => state.centerMapRegion);
+  const startRideAddress = useRideStore(state => state.startRideAddress);
+  const endRideAddress = useRideStore(state => state.endRideAddress);
 
   const handleOnClick = useCallback(async () => {
     await Linking.openURL('https://vroom-hetic.web.app/price');
   }, []);
+
+  console.log('val start', startRideAddress);
+  console.log('val end', endRideAddress);
 
   const handleMenuPress = useCallback(() => {
     navigation.navigate('Menu');
@@ -54,36 +37,32 @@ export default function HomePageScreen({navigation}: {navigation: any}) {
 
   const onRegionChange = useCallback(() => {}, []);
 
-  const handleDestinationSearchSubmit = useCallback(async data => {
-    const {startAddress, endAddress} = data;
-    try {
-      console.log(startAddress, endAddress);
-      const {success: startAddressInfo} = await searchAddress(startAddress);
-      const {success: endAddressInfo} = await searchAddress(endAddress);
+  const handleDestinationSearchSubmit = useCallback(
+    async data => {
+      const {startAddress, endAddress} = data;
+      try {
+        const {success: startAddressInfo} = await searchAddress(startAddress);
+        const {success: endAddressInfo} = await searchAddress(endAddress);
 
-      console.log(startAddressInfo, endAddressInfo);
+        console.log(startAddressInfo, endAddressInfo);
 
-      if (startAddressInfo && endAddressInfo) {
-        const distanceInfo = await calculateKmAndTime(
-          startAddressInfo,
-          endAddressInfo,
-        );
-        console.log(distanceInfo);
+        if (startAddressInfo && endAddressInfo) {
+          const {success: distanceInfo} = await calculateKmAndTime(
+            startAddressInfo,
+            endAddressInfo,
+          );
+
+          setRide(
+            {...startAddressInfo, ...(distanceInfo ?? {})},
+            {...endAddressInfo, ...(distanceInfo ?? {})},
+          );
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
-  // init
-  useEffect(() => {
-    setCenterRegion({
-      latitude: 48.8519287,
-      longitude: 2.4235699,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    });
-  }, []);
+    },
+    [setRide],
+  );
 
   return (
     <SafeAreaView style={Style.container}>
@@ -99,35 +78,46 @@ export default function HomePageScreen({navigation}: {navigation: any}) {
 
       <MapView
         style={StyleSheet.absoluteFill}
-        region={centerRegion}
+        region={centerMapRegion}
         onRegionChange={onRegionChange}>
-        <Marker
-          key={startPoint.id}
-          coordinate={startPoint.region}
-          title={startPoint.title}
-          description={startPoint.description}
-        />
-        <Marker
-          key={endPoint.id}
-          coordinate={endPoint.region}
-          title={endPoint.title}
-          description={endPoint.description}
-        />
-        <Polyline
-          coordinates={[
-            {
-              latitude: startPoint.region.latitude,
-              longitude: startPoint.region.longitude,
-            },
-            {
-              latitude: endPoint.region.latitude,
-              longitude: endPoint.region.longitude,
-            },
-          ]}
-          strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
-          strokeColors={['#7F0000']}
-          strokeWidth={6}
-        />
+        {startRideAddress && startRideAddress.latLng ? (
+          <Marker
+            key={startRideAddress.street}
+            coordinate={startRideAddress.latLng}
+            title={startRideAddress.street}
+            description={`${startRideAddress.durationStr} / ${startRideAddress.distanceInKmStr}`}
+          />
+        ) : undefined}
+
+        {endRideAddress && endRideAddress.latLng ? (
+          <Marker
+            key={endRideAddress.street}
+            coordinate={endRideAddress.latLng}
+            title={endRideAddress.street}
+            description={`${endRideAddress.durationStr} / ${endRideAddress.distanceInKmStr}`}
+          />
+        ) : undefined}
+
+        {startRideAddress &&
+        startRideAddress.latLng &&
+        endRideAddress &&
+        endRideAddress.latLng ? (
+          <Polyline
+            coordinates={[
+              {
+                latitude: startRideAddress.latLng.latitude,
+                longitude: startRideAddress.latLng.longitude,
+              },
+              {
+                latitude: endRideAddress.latLng.latitude,
+                longitude: endRideAddress.latLng.longitude,
+              },
+            ]}
+            strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
+            strokeColors={['#7F0000']}
+            strokeWidth={6}
+          />
+        ) : undefined}
       </MapView>
     </SafeAreaView>
   );

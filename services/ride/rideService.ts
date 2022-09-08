@@ -10,7 +10,6 @@ export const searchAddress = async (
   const body = JSON.stringify({
     query: address,
   });
-  console.log(body);
   try {
     const response = await fetch(`${API_URL}/ride/searchAddress`, {
       method: 'POST',
@@ -48,7 +47,6 @@ export const calculateKmAndTime = async (
       `${startAddressInfo.lon},${startAddressInfo.lat};${endAddressInfo.lon},${endAddressInfo.lat}`,
     ],
   });
-  console.log(body);
   try {
     const response = await fetch(`${API_URL}/ride/calculateKmAndTime`, {
       method: 'POST',
