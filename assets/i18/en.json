@@ -3,5 +3,7 @@
   "firstName": "FirstName",
   "password": "Password",
   "email": "Email",
-  "phone": "Phone"
+  "phone": "Phone",
+  "startAddress": "Start address",
+  "endAddress": "End address"
 }

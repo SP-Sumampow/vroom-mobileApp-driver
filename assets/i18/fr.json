@@ -3,5 +3,7 @@
   "firstName": "Prénom",
   "password": "Mot de passe",
   "email": "Email",
-  "phone": "Téléphone"
+  "phone": "Téléphone",
+  "startAdress": "Adresse de départ",
+  "endAdress": "Adresse de destination"
 }

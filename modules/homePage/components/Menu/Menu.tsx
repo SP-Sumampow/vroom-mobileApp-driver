@@ -15,6 +15,7 @@ const HomeMenu = ({onMenuPress, onNotificationPress}: HomeMenuProps) => {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        zIndex: 2,
       }}>
       <TouchableOpacity onPress={onMenuPress}>
         <MenuIcon />

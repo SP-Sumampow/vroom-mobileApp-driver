@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../global/theme/colors';
+import {colors} from '../../../global/theme/colors';
 
 export const styles = StyleSheet.create({
   buttonViewAll: {

@@ -5,7 +5,7 @@ import {styles} from './HomePageButton.styles';
 import {ButtonProps} from './HomePageButton.type';
 
 // @ts-ignore
-import ArrowWhite from '../../../assets/svg/arrowWhite.svg';
+import ArrowWhite from '../../../../assets/svg/arrowWhite.svg';
 
 const HomePageButtonTakeSubscription = ({onPress}: ButtonProps) => {
   //const isDarkMode = {useColorScheme() === 'dark';
