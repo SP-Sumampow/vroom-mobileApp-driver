@@ -1,5 +1,5 @@
 import {Text, View} from 'react-native';
-import React, {useCallback} from 'react';
+import React from 'react';
 import {AddressDestinationFormProps} from './AddressDestinationForm.types';
 import Style from '../../screen/HomePageScreen.styles';
 import {Controller, SubmitErrorHandler, useForm} from 'react-hook-form';
@@ -11,15 +11,13 @@ import {SearchDestinationInfoInputs} from '../../screen/HomePageScreen.types';
 import {colors} from '../../../global/theme/colors';
 import {t} from 'i18next';
 
-const AddressDestinationForm = ({style}: AddressDestinationFormProps) => {
+const AddressDestinationForm = ({
+  style,
+  onDestinationSearchSubmit,
+}: AddressDestinationFormProps) => {
   // Hooks
   const {control, handleSubmit} = useForm<SearchDestinationInfoInputs>();
   const toast = useToast();
-
-  const handleOnSubmit = useCallback(async data => {
-    const {startAddress, endAddress} = data;
-    console.log(startAddress, endAddress);
-  }, []);
 
   const onError: SubmitErrorHandler<SearchDestinationInfoInputs> = errors => {
     const val = [errors.startAddress, errors.endAddress].find(
@@ -92,7 +90,7 @@ const AddressDestinationForm = ({style}: AddressDestinationFormProps) => {
       />
       <Button
         style={Style.formAddressButton}
-        onPress={handleSubmit(handleOnSubmit, onError)}>
+        onPress={handleSubmit(onDestinationSearchSubmit, onError)}>
         <Text style={Style.formAdressButtonText}>Submit</Text>
       </Button>
     </View>

@@ -6,6 +6,10 @@ import {PointType} from '../../../Model/Point/Point.types';
 import Style from './HomePageScreen.styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AddressDestinationForm from '../components/AddressDestinationForm/AddressDestinationForm';
+import {
+  calculateKmAndTime,
+  searchAddress,
+} from '../../../services/ride/rideService';
 // @ts-ignore
 
 //{navigation}: {navigation: any}
@@ -50,6 +54,27 @@ export default function HomePageScreen({navigation}: {navigation: any}) {
 
   const onRegionChange = useCallback(() => {}, []);
 
+  const handleDestinationSearchSubmit = useCallback(async data => {
+    const {startAddress, endAddress} = data;
+    try {
+      console.log(startAddress, endAddress);
+      const {success: startAddressInfo} = await searchAddress(startAddress);
+      const {success: endAddressInfo} = await searchAddress(endAddress);
+
+      console.log(startAddressInfo, endAddressInfo);
+
+      if (startAddressInfo && endAddressInfo) {
+        const distanceInfo = await calculateKmAndTime(
+          startAddressInfo,
+          endAddressInfo,
+        );
+        console.log(distanceInfo);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   // init
   useEffect(() => {
     setCenterRegion({
@@ -68,6 +93,7 @@ export default function HomePageScreen({navigation}: {navigation: any}) {
       />
 
       <AddressDestinationForm
+        onDestinationSearchSubmit={handleDestinationSearchSubmit}
         style={[Style.formAddressContainer, {top: topSafeArea + 60}]}
       />
 

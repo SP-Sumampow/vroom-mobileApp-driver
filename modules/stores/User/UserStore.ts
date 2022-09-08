@@ -1,4 +1,4 @@
-import create, {GetState, SetState, StoreApi} from 'zustand';
+import create from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {UserStoreType} from './UserStore.types';
 import {persist} from 'zustand/middleware';
@@ -23,8 +23,8 @@ const useUserStore = create<UserStoreType>()(
       resetStore: () => set(() => ({...INITIAL_STATES})),
     }),
     {
-      name: 'food-storage', // unique name
-      getStorage: () => AsyncStorage, // Add this here!
+      name: 'user-storage',
+      getStorage: () => AsyncStorage,
     },
   ),
 );
